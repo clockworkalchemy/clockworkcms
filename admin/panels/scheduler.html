@@ -1,0 +1,48 @@
+<link rel='stylesheet' type='text/css' href='/admin/style/schedule-grid.css' />
+
+
+<div ng-controller='SchedulerCtrl'>
+  <div id='popupDiv' ng-show='doShowOptions()' class='schedPanelOptions'  ng-include="'/admin/panels/sched_options.html'">
+  </div>
+  
+  <div id='popupDiv' ng-include="'/admin/panels/sched_filter.html'">
+  </div>
+
+  <table>
+  <tr>
+    <td class='scheduleTable'>
+    </td>
+
+    <td class='scheduleTable'>
+    
+      <h2>{{panelday.panel_day}} {{panelday.panel_date}}</h2>
+    
+      <div class='panelScheduleGridTable'>
+        <div class='panelScheduleGridHeaderRow'>
+          <div class='panelScheduleGridRow'>
+            <div class='panelScheduleGridTd panelGridTime'>Day</div>
+            <div class='panelScheduleGridTd panelGridTime'>Time</div>
+            <div ng-repeat="room in roomList | filter:{room_id:showRoom} | orderBy:'room_name'" class='panelScheduleGridTd panelGridTime' ngClass='"room_"+room.room_name'>{{room.room_name}}<br><b>{{room.description}}</b></div>
+          </div>
+        </div>
+    
+        <div class='panelScheduleGridBody'>
+          <div ng-repeat="startTime in timeSlots | filter:{dateId:showDate}" class='panelScheduleGridRow' ng-class='classByTime(startTime.startTime)' ng-class-even="'evenRow'">
+            <div class='panelScheduleGridTd panelGridTime' ng-bind="formatDate(startTime.startTime) | date:'EEE MMM d'" ></div>
+            <div class='panelScheduleGridTd panelGridTime' ng-bind="formatDate(startTime.startTime) | date:'hh:mm a'" ></div>
+            <div class='panelScheduleGridTd droppable' ng-repeat="room in roomList | filter:{room_id:showRoom} | orderBy:'room_name'" id="{{startTime.dateId}}_{{startTime.startTime}}_{{room.room_id}}" >
+              <div class='panelGridTime' ng-class='classForRoom(room.room_id, startTime.startTime)' ng-click='showPanelOptions(startTime.fullTime,room.room_id, $event);'>
+                <div ng-bind='schedule[room.room_id][startTime.fullTime].panel_title' ng-show="schedule[room.room_id][startTime.fullTime]" class='panelGridTimePanel' ng-class='getPanelClasses(schedule[room.room_id][startTime.fullTime])' ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </td>
+  
+  </tr>
+  </table>
+  
+  </div>
+</div>
+

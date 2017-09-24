@@ -1,0 +1,46 @@
+    
+
+    <div class='newRoomTmpl'>
+      <form id='adminForm'>
+      <table width='100%'>
+        <tr>
+          <td><input type='submit' ng-click='cancelNewRoom();' value='Cancel'></td>
+          <td width='100%'></td>
+          <td><input type='submit' ng-click='addRoom();' value='Save New Room'></td>
+        </tr>
+      </table>
+
+      <div>
+        <label for="room_name"><span class="form_label">Room Name</span></label>
+        <input type="text"  id='room_name' ng-model='newRoom.room_name'>
+        <label for="description"><span class="form_label">Description<span></label>
+        <input type="text"  id='description' ng-model='newRoom.description'>
+        <label for="capacity"><span class="form_label">Capacity</span></label>
+        <input type="number"  id='capacity' ng-model='newRoom.capacity'>
+        <label for="mapclass"><span class="form_label">Map Class</span></label>
+        <input type="text"  id='mapclass' ng-model='newRoom.mapclass'>
+        <label for="floornum"><span class="form_label">Floor Num</span></label>
+        <input type="text"  id='floornum' ng-model='newRoom.floornum'>
+        <label for="latitude"><span class="form_label">Latitude</span></label>
+        <input type="number"  id='latitude' ng-model='newRoom.latitude' step="0.0001">
+        <label for="longitude"><span class="form_label">Longitude</span></label>
+        <input type="number"  id='longitude' ng-model='newRoom.longitude' step="0.0001">
+        <label for="roomstatus"><span class="form_label">Status</span></label>
+        <select id='roomstatus' ng-model='newRoom.roomstatus'>
+        <option value='1'>Active</option>
+        <option value='0'>Inactive</option>
+        </select>
+        <label for="nickname"><span class="form_label">Nickname</span></label>
+        <input type="text"  id='nickname' ng-model='newRoom.nickname'>
+      </div>
+
+      <table width='100%'>
+        <tr>
+          <td><input type='submit' ng-click='cancelNewRoom();' value='Cancel'></td>
+          <td width='100%'></td>
+          <td><input type='submit' ng-click='addRoom();' value='Save New Room'></td>
+        </tr>
+      </table>
+    </form>
+    </div> <!-- newRoomTmpl -->
+

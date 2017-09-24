@@ -1,0 +1,87 @@
+
+<div ng-controller='BazaarCtrl'>
+
+  <p>
+  <a href="/admin/index.cgi?p=events-and-exhibits/bazaar/form/list&ret=csv">Download Artists as .csv</a><br>
+  </p>
+
+  <div class='editPanelStyle' id='edit-panel'>
+    <div ng-click='closeEdit();'>[ X ]</div>
+    <table>
+      <tr><td>Artist: </td>
+          <td><input type=text ng-model="artistToEdit.name"/></td>
+          <td>
+              <button ng-click="approveArtistEdit()" ng-if="artistToEdit.approved==0">Approve</button>
+              <button ng-click="unapproveArtistEdit()" ng-if="artistToEdit.approved==1">Un-Approve</button>
+              <span ng-if="artistToEdit.approved == 1"><BR>Approved Date {{artistToEdit.approved_date}}<BR></span>
+              </td></tr>
+      <tr><td>Company Name: </td>
+          <td><input type=text ng-model="artistToEdit.display_name"/></td>
+          <td>
+              <button ng-click="requestPayment()" ng-if="artistToEdit.approved==1 && artistToEdit.needs_payment==0">Request Payment</button>
+              <button ng-click="unRequestPayment()" ng-if="artistToEdit.approved==1 && artistToEdit.needs_payment==1">Un-Request Payment</button>
+              </td></tr>
+      <tr><td>Phone Number: </td>
+          <td><input type=text ng-model="artistToEdit.phone"/></td>
+          <td>
+              <span ng-if="artistToEdit.paid_date != null">PAID {{artistToEdit.paid_date}}</span>
+              </td></tr>
+      <tr><td>Email: </td>
+          <td><input type=text ng-model="artistToEdit.email"/></td>
+          <td>Invite Code: <input type=text ng-model="artistToEdit.invitecode"/></td></tr>
+      <tr><td>Date of Birth: </td>
+          <td><input type=text ng-model="artistToEdit.birthday"/></td>
+          <td></td></tr>
+      <tr><td>Company Website: </td>
+          <td><input type=text ng-model="artistToEdit.display_contact"/></td>
+          <td></td></tr>
+      <tr><td>Boothmate(s): </td>
+          <td><input type=text ng-model="artistToEdit.helper_name"/></td>
+          <td></td></tr>
+      <tr><td>Seller's Permit: </td>
+          <td><input type=text ng-model="artistToEdit.seller_permit"/></td>
+          <td></td></tr>
+      <tr><td>Mailing Address: </td>
+          <td><input type=text ng-model="artistToEdit.address_1"/></td>
+          <td></td></tr>
+      <tr><td>Mailing Address 2: </td>
+          <td><input type=text ng-model="artistToEdit.address_2"/></td>
+          <td></td></tr>
+      <tr><td>City: </td>
+          <td><input type=text ng-model="artistToEdit.city"/></td>
+          <td></td></tr>
+      <tr><td>State: </td>
+          <td><input type=text ng-model="artistToEdit.state"/></td>
+          <td></td></tr>
+      <tr><td>Zip Code: </td>
+          <td><input type=text ng-model="artistToEdit.zipcode"/></td>
+          <td></td></tr>
+      <tr><td>Country: </td>
+          <td><input type=text ng-model="artistToEdit.country"/></td>
+          <td></td></tr>
+      <tr><td>Website or Image URL: </td>
+          <td><input type=text ng-model="artistToEdit.art_url"/></td>
+          <td></td></tr>
+      <tr><td>Type of Goods to be Sold: </td>
+          <td>
+          <select ng-model="artistToEdit.art_type" id="art_type" name="art_type">
+            <option value="">----</option>
+            <option value="clothing">Clothing</option>
+            <option value="jewelry">Jewelry</option>
+            <option value="accessories">Accessories (Hats, Goggles, Bags, Parasols)</option>
+            <option value="emporium">Emporium (a little bit of everything)</option>
+            <option value="mixedmedia">Mixed Media (sculpture, paint, artwork of other types)</option>
+            <option value="other">Other</option> 
+          </select>
+          </td>
+      <tr><td>Comments or other Notes: </td>
+	  <td><textarea ng-model="artistToEdit.notes" columns=40 rows=5></textarea></td>
+          <td></td></tr>
+    </table>
+  </div>
+
+  <div id='bazaar-grid' class='gridStyle' ng-grid='bazaarGridOptions' ui-grid-auto-resize ng-style="getTableHeight()"> </div>
+
+</div>
+
+

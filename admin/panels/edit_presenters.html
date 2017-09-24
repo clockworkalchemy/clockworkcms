@@ -1,0 +1,31 @@
+  <div>
+    <table>
+      <tr>
+        <td><button ng-click="saveEdits()">Save Changes</button></td>
+        <td style='text-align:right;'><button ng-click='closeEdit();'>Cancel</button></td>
+      </tr>
+      <tr><td>Panelist Name</td> <td><input type='text' ng-model='Presenter.name' size=50></td></tr>
+      <tr><td>Fan Name</td> <td><input type='text' ng-model='Presenter.fanname' size=50></td></tr>
+      <tr><td>Phone</td><td><input type='text' ng-model='Presenter.phone' size=50></td></tr>
+      <tr><td>At-Con Phone</td><td><input type='text' ng-model='Presenter.atcon_phone' size=50></td></tr>
+      <tr><td>Email</td> <td><input type='text' ng-model='Presenter.email' size=50></td></tr>
+      <tr><td>Email 2</td> <td><input type='text' ng-model='Presenter.email2' size=50></td></tr>
+      <tr><td>Has Photo</td>
+          <td><select ng-model='Presenter.has_photo' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+      <tr><td>Photo</td> <td><input type='text' ng-model='Presenter.photo' size=50></td></tr>
+      <tr><td>Bio</td> 
+      <td><textarea ng-model='Presenter.bio' cols="50"  rows="5"></textarea> </td></tr>
+
+      <tr><td>Presenter Type:</td>
+          <td><select ng-model='Presenter.type' ng-options='obj.id as obj.name for obj in presenterType'></select></td></tr>
+      <tr><td>Discount Request:</td>
+          <td><select ng-model='Presenter.mem_dis' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+      <tr>
+        <td><button ng-click="saveEdits()">Save Changes</button></td>
+        <td style='text-align:right;'><button ng-click='closeEdit();'>Cancel</button></td>
+      </tr>
+    </table>
+  </div>
+
+
+

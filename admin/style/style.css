@@ -1,0 +1,100 @@
+.hist-list-container {
+  display: none;
+  position: absolute;
+  border: 2px black solid;
+  border-radius: 3px; 
+  padding: 4px;
+  background-color: white;
+}
+
+.hist-cell {
+}
+
+.rename-container {
+  display: none;
+  position: absolute;
+  border: 2px black solid;
+  border-radius: 3px; 
+  padding: 4px;
+  background-color: white;
+}
+
+.history {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.pending-resource-row {
+  width: 788px;
+  display: table-row;
+  margin: 2px 2px 2px 2px;
+}
+.rownum-col {
+  display: table-cell;
+  width: 20px;
+  height: 20px;
+  border: 2px black solid;
+  font-weight: bold;
+  padding: 4px;
+}
+.resource-id-col {
+  display: table-cell;
+  width: 20px;
+  height: 20px;
+  border: 2px black solid;
+  font-weight: bold;
+  padding: 4px;
+}
+.command-col {
+  display: table-cell;
+  width: 70px;
+  height: 20px;
+  border: 2px black solid;
+  font-weight: bold;
+  padding: 4px;
+}
+.pagename-col {
+  display: table-cell;
+  width: 280px;
+  height: 20px;
+  border: 2px black solid;
+  font-weight: bold;
+  padding: 4px;
+}
+.lastedited-on-col {
+  display: table-cell;
+  width: 160px;
+  height: 20px;
+  border: 2px black solid;
+  font-weight: bold;
+  padding: 4px;
+}
+.lastedited-by-col {
+  display: table-cell;
+  width: 140px;
+  height: 20px;
+  border: 2px black solid;
+  font-weight: bold;
+  padding: 4px;
+}
+#pending-content-div {
+  position: absolute;
+}
+
+.angular-temp-vars {
+  display: none;
+}
+.angular-temp-vars-button {
+  display: block;
+}
+
+.oneartist {
+	border: 1px solid #F9EDC5;
+	margin: 4px;
+	padding: 4px;
+}
+
+.oneartist_hidden {
+	display: none;
+}
+

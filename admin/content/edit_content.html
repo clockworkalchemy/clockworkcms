@@ -1,0 +1,237 @@
+<div>
+  <div id='content-err'></div>
+
+  <div>
+    <H3>Editing Page: {{pageToEdit.full_pagename}}</h3>
+
+    <div class='btn-group' role='group'>
+      <button type='button' ng-click='saveEdits()' class='btn btn-default'>Save</button>
+      <button type='button' ng-click='cancelEdits()' class='btn btn-default'>Cancel</button>
+      <div class='btn-group' role="group">
+        <button class="btn btn-default dropdown-toggle" type="button" id="more-actions" data-toggle="dropdown">
+          More Actions
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="more-actions">
+          <li><a ng-click="toggle('featured-status')">Update Featured Status</a></li>
+          <li><a ng-click="approveContent()">Approve</a></li>
+          <li><a ng-click="toggle('live-date')">Update Live Date</a></li>
+          <li><a ng-click="toggle('image-url')">Update Image</a></li>
+          <li><a ng-click="toggle('page-info')">Show Page Info</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a ng-click="toggle('rename-page')">Rename</a></li>
+          <li><a ng-click="toggle('update-subtemplate')">Update Sub-Template</a></li>
+          <li><a ng-click="toggle('update-template-ctrl')">Update Template/Controller</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a ng-click="showHistory()">Show History</a></li>
+          <li><a ng-click="toggle('delete-page')">Delete Page</a></li>
+        </ul>
+      </div>
+      <button type='button' ng-click='cancelEdits()' class='btn btn-default'>Done</button>
+    </div>
+
+    <div id='success-box' class="alert alert-success" style='display: none;'>
+      <a href="javascript:exit()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {{successMsg}}
+    </div>
+
+    <div id='error-box' class="alert alert-danger" style='display: none;'>
+      <a href="javascript:exit()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {{errMsg}}
+    </div>
+
+    <div id='page-info' style='display: none;' class='info-box'>
+      <div><b>Parent Page</b> {{pageToEdit.parent_page}}</div>
+      <div><b>Page Name</b> {{pageToEdit.pagename}}</div>
+      <div><b>Revision</b>{{pageToEdit.revision}}</div>
+      <div>
+        <button ng-click="toggle('page-info')" class='center'>Close</button>
+      </div>
+    </div>
+
+    <div id='featured-status' style='display: none;' class='info-box'>
+      <div>
+        <b>Featured Status</b>
+        <select ng-model='pageToEdit.featured'>
+         <option ng-repeat='opt in FEATURED_OPTS' value='{{opt.id}}'>{{opt.label}}</option>
+        </select>
+      </div>
+      <div>
+        <b>Featured Year</b>
+        <select ng-model='pageToEdit.featuredyear'>
+          <option value=''>Select Year</option>
+          <option value='2016'>2016</option>
+          <option value='2017'>2017</option>
+          <option value='2018'>2018</option>
+        </select>
+      </div>
+
+      <div>
+        <button ng-click="updateFeatured('featured-status')" class='center'>Update</button>
+        <button ng-click="toggle('featured-status')" class='center'>Close</button>
+      </div>
+    </div>
+
+    <div id='live-date' style='display: none;' class='info-box'>
+      <div>
+        <b>Live Date</b>
+        <input size=15 name='live_date' class='live_date' ng-model='pageToEdit.live_date'></td>
+      </div>
+
+      <div>
+        <button ng-click="updateLiveDate('live-date')" class='center'>Update</button>
+        <button ng-click="toggle('live-date')" class='center'>Close</button>
+      </div>
+    </div>
+
+
+    <div id='image-url' style='display: none;' class='info-box'>
+      <div>
+        <b>Image URL</b>
+        <input size=15 name='image_url' ng-model='pageToEdit.image_url'></td>
+      </div>
+
+      <div>
+        <button ng-click="updateImage('image-url')" class='center'>Update</button>
+        <button ng-click="toggle('image-url')" class='center'>Close</button>
+      </div>
+    </div>
+
+    <div id='rename-page' style='display: none;' class='info-box'>
+      <div>
+        <b>New Page Name</b>
+        <input size=15 ng-model='pageToEdit.pagename' /></td>
+      </div>
+
+      <div>
+        <button ng-click="renamePage('rename-page')" class='center'>Update</button>
+        <button ng-click="toggle('rename-page')" class='center'>Close</button>
+      </div>
+    </div>
+
+    <div id='update-subtemplate' style='display: none;' class='info-box'>
+      <div>
+        <b>Subtemplate</b>
+        <select ng-model='pageToEdit.subtemplate_id'>
+         <option ng-repeat='opt in SUBTEMPLATE_OPTS' value='{{opt.id}}'>{{opt.label}}</option>
+        </select>
+      </div>
+
+      <div>
+        <button ng-click="updateSubtemplate('update-subtemplate')" class='center'>Update</button>
+        <button ng-click="toggle('update-subtemplate')" class='center'>Close</button>
+      </div>
+    </div>
+
+    <div id='update-template-ctrl' style='display: none;' class='info-box'>
+      <div>
+        <b>Template URL</b>
+        <select ng-model='pageToEdit.templateUrl'>
+          <option ng-repeat='opt in NG_TEMPLATE' value='{{opt}}'>{{opt}}</option>
+        </select>
+      </div>
+
+      <div>
+        <b>Controller</b>
+        <select ng-model='pageToEdit.controller'>
+          <option ng-repeat='opt in NG_CTRL' value='{{opt}}'>{{opt}}</option>
+        </select>
+      </div>
+
+      <div>
+        <button ng-click="updateTemplateCtrl('update-template-ctrl')" class='center'>Update</button>
+        <button ng-click="toggle('update-template-ctrl')" class='center'>Close</button>
+      </div>
+    </div>
+
+    <div id='show-history' style='display: none;' class='info-box'>
+      <div>
+        <table>
+        <tr><th><B>Revision</b></th><th><B>Updated By</b></th><th><b>Updated Date</b></th></tr>
+        <tr ng-repeat='rev in pageHistory'>
+          <td>{{rev.revision}}</td>
+          <td>{{rev.updated_by}}</td>
+          <td>{{rev.updated_date}}</td>
+          <td><button ng-click='loadRevision(rev.revision)'>Load Revision</button></td>
+        </tr>
+        </table>
+      </div>
+
+      <div>
+        <button ng-click="toggle('show-history')" class='center'>Close</button>
+      </div>
+    </div>
+
+    <div id='delete-page' style='display: none;' class='info-box'>
+      <div>
+        Are you sure you wish to delete this page in its entirety?<BR>
+        This cannot be undone!
+      </div>
+
+      <div>
+        <button ng-click="deletePage('delete-page')" class='center'>DELETE</button>
+        <button ng-click="toggle('delete-page')" class='center'>Close</button>
+      </div>
+    </div>
+
+
+
+
+    <div class='admin-div' resizable>
+      <table class='admin-table'>
+      <tbody>
+      <tr>
+        <td valign=top><b>ID</b></td>
+        <td>{{pageToEdit.resource_id}}</td>
+      </tr>
+      <tr>
+        <td valign=top><b>Realm</b></td>
+        <td>{{pageToEdit.realm}}</td>
+      </tr>
+      <tr>
+        <td valign=top><b>Live Date</b></td>
+        <td>{{pageToEdit.live_date}}</td>
+      </tr>
+      <tr>
+        <td valign=top><b>Featured Status</b></td>
+        <td>{{FEATURED_STATUSES[pageToEdit.featured]}}</td>
+      </tr>
+      <tr ng-if="pageToEdit.featured != 0">
+        <td valign=top><b>Featured Year</b></td>
+        <td>{{pageToEdit.featuredyear}}</td>
+      </tr>
+      <tr>
+        <td valign=top><b>Content Template</b></td>
+        <td>{{SUBTEMPLATE[pageToEdit.subtemplate_id]}}</td>
+      </tr>
+      <tr ng-if="pageToEdit.image_url != ''">
+        <td style='vertical-align: top;'><b>Image URL</b></td>
+        <td><a ng-click="toggle('image_url_preview')">{{pageToEdit.image_url}}</a></td>
+      </tr>
+      <tr style='display: none;' id='image_url_preview'>
+        <td colspan=2>
+          <img ng-src='{{pageToEdit.image_url}}' ng-click="toggle('image_url_preview')" height='200'/>
+        </td>
+      </tr>
+      <tr>
+        <td style='vertical-align: top;'><b>Title</b></td>
+        <td><input ng-model='pageToEdit.title' size='30'></td>
+      </tr>
+      <tr>
+        <td style='vertical-align: top;'><b>Summary</b></td>
+        <td><textarea ng-model='pageToEdit.summary' rows=7 cols=72></textarea></td>
+      </tr>
+      <tr>
+        <td style='vertical-align: top;'><b>Full Text</b></td>
+        <td><textarea ng-model='pageToEdit.full_text' rows=20 cols=72></textarea></td>
+      </tr>
+
+      </tbody>
+      </table>
+    </div>
+     
+  </div> <!-- #page-main -->
+</div><!-- #page -->
+
+
+

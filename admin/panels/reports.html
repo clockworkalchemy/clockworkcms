@@ -1,0 +1,13 @@
+
+<div>
+  <table><tr>
+    <td>Choose report type:</td>
+    <td><select ng-disabled="myData.length" ng-model="reportName"  ng-options="d.id as d.name for d in reportType | orderBy : 'name'"></select></td>
+    <td><button ng-click='runReport();'>Run Report</button></td>
+    <td><button ng-click='downloadResults();'>Download Results</button></td>
+  </tr></table>
+
+  <div class='gridStyle' ng-grid='reportResults' style='height: 300px;' ui-grid-auto-resize> </div>
+
+</div>
+

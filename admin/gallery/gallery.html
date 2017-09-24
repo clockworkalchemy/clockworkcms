@@ -1,0 +1,114 @@
+<div ng-controller='GalleryCtrl'>
+
+  <div>
+    <a target='_new' href="/admin/index.cgi?p=events-and-exhibits/gallery/form/list&ret=csv">Download Artists as .csv</a><br>
+  </div>
+
+  <div class='editPanelStyle' id='edit-panel'>
+    <div ng-click='closeEdit();'>[ X ]</div>
+    <table>
+      <tr><td>Artist: </td>
+          <td><input type=text ng-model="artistToEdit.name"/></td>
+          <td><!--
+              <button ng-click="approveArtistEdit()" ng-if="artistToEdit.status==0">Approve</button>
+              <button ng-click="unapproveArtistEdit()" ng-if="artistToEdit.status==1">Un-Approve</button>
+-->
+              </td></tr>
+      <tr><td>Fan/Professional: </td>
+          <td><input type=text ng-model="artistToEdit.display_name"/></td>
+          <td> </td></tr>
+      <tr><td>Phone Number: </td>
+          <td><input type=text ng-model="artistToEdit.phone"/></td>
+          <td> </td></tr>
+      <tr><td>Email: </td>
+          <td><input type=text ng-model="artistToEdit.email"/></td>
+          <td> </td></tr>
+      <tr><td>Public Contact Info: </td>
+          <td><input type=text ng-model="artistToEdit.display_contact"/></td>
+          <td></td></tr>
+      <tr><td>Want to give a panel?: </td>
+          <td><input type=text ng-model="artistToEdit.panel_option"/></td>
+          <td></td></tr>
+      <tr><td>Date Submitted: </td>
+          <td><input type=text ng-model="artistToEdit.submitted_date"/></td>
+          <td></td></tr>
+      <tr><td>Art Piece Title 1: </td>
+          <td><input type=text ng-model="artistToEdit.title1"/></td>
+          <td></td></tr>
+      <tr><td>Photo URL 1: </td>
+          <td><input type=text ng-model="artistToEdit.photo_url1"/></td>
+          <td></td></tr>
+      <tr><td>Art Type 1: </td>
+          <td><input type=text ng-model="artistToEdit.art_type1"/></td>
+          <td></td></tr>
+      <tr><td>Art Medium 1: </td>
+          <td><input type=text ng-model="artistToEdit.art_medium1"/></td>
+          <td></td></tr>
+      <tr><td>Art Size 1: </td>
+          <td><input type=text ng-model="artistToEdit.art_size1"/></td>
+          <td></td></tr>
+      <tr><td>Art Weight 1: </td>
+          <td><input type=text ng-model="artistToEdit.art_weight1"/></td>
+          <td></td></tr>
+      <tr><td>Collection Information 1: </td>
+	  <td><textarea ng-model="artistToEdit.collection_info1" columns=40 rows=5></textarea></td>
+          <td></td></tr>
+      <tr><td>Display Requirements 1: </td>
+	  <td><textarea ng-model="artistToEdit.display_reqs1" columns=40 rows=5></textarea></td>
+          <td></td></tr>
+      <tr><td>Other Comments 1: </td>
+	  <td><textarea ng-model="artistToEdit.other_comments1" columns=40 rows=5></textarea></td>
+          <td></td></tr>
+      <tr><td>Fragile 1: </td>
+          <td><select ng-model='artistToEdit.fragile1' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+          <td></td></tr>
+      <tr><td>Include DO NOT TOUCH sign 1: </td>
+          <td><select ng-model='artistToEdit.no_touch1' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+          <td></td></tr>
+      <tr><td>Include NO PHOTOS sign 1: </td>
+          <td><select ng-model='artistToEdit.no_photo1' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+          <td></td></tr>
+      <tr><td>Art Piece Title 2: </td>
+          <td><input type=text ng-model="artistToEdit.title2"/></td>
+          <td></td></tr>
+      <tr><td>Photo URL 2: </td>
+          <td><input type=text ng-model="artistToEdit.photo_url2"/></td>
+          <td></td></tr>
+      <tr><td>Art Type 2: </td>
+          <td><input type=text ng-model="artistToEdit.art_type2"/></td>
+          <td></td></tr>
+      <tr><td>Art Medium 2: </td>
+          <td><input type=text ng-model="artistToEdit.art_medium2"/></td>
+          <td></td></tr>
+      <tr><td>Art Size 2: </td>
+          <td><input type=text ng-model="artistToEdit.art_size2"/></td>
+          <td></td></tr>
+      <tr><td>Art Weight 2: </td>
+          <td><input type=text ng-model="artistToEdit.art_weight2"/></td>
+          <td></td></tr>
+      <tr><td>Collection Information 2: </td>
+	  <td><textarea ng-model="artistToEdit.collection_info2" columns=40 rows=5></textarea></td>
+          <td></td></tr>
+      <tr><td>Display Requirements 2: </td>
+	  <td><textarea ng-model="artistToEdit.display_reqs2" columns=40 rows=5></textarea></td>
+          <td></td></tr>
+      <tr><td>Other Comments 2: </td>
+	  <td><textarea ng-model="artistToEdit.other_comments2" columns=40 rows=5></textarea></td>
+          <td></td></tr>
+      <tr><td>Fragile 2: </td>
+          <td><select ng-model='artistToEdit.fragile2' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+          <td></td></tr>
+      <tr><td>Include DO NOT TOUCH sign 2: </td>
+          <td><select ng-model='artistToEdit.no_touch2' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+          <td></td></tr>
+      <tr><td>Include NO PHOTOS sign 2: </td>
+          <td><select ng-model='artistToEdit.no_photo2' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+          <td></td></tr>
+
+    </table>
+  </div>
+
+  <div id='gallery-grid' class='gridStyle' ng-grid='galleryGridOptions' ui-grid-auto-resize ng-style="getTableHeight()"> </div>
+
+
+</div>

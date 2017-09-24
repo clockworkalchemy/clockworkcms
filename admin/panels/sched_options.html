@@ -1,0 +1,18 @@
+
+<div ng-model='selectedPanel'>
+  <div ng-click='$parent.closeOptions()'>[X]</div>
+    <div>Panel Title: {{$parent.selectedPanel.panel_title}}</div>
+    <div>Event Type: {{$parent.selectedPanel.event_type}}</div>
+    <div>Panel Length: {{$parent.selectedPanel.panel_length}}</div>
+    <div>Panel Description( Submitted ): <div>{{$parent.selectedPanel.panel_description_sub}}</div></div>
+    <div>Panel Description: <div>{{$parent.selectedPanel.panel_description}}</div></div>
+    <div>Age Range: {{$parent.selectedPanel.age_range}}</div>
+    <div>
+    Presenters:<BR>
+    <div ng-repeat='pres in $parent.selectedPanel.presenters'>{{pres.name}}</div>
+    </div>
+
+    <button ng-click='$parent.unschedule($parent.selectedPanel.panel_id)'>Remove Panel from Schedule</button> <BR>
+  </div>
+</div>
+

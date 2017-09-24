@@ -1,0 +1,21 @@
+    
+<div class='roomListTmpl' ng-show='showRoomList()'>
+  <table>
+    <tr>
+      <td><button ng-click='newRoomStart();'>Create New Room</button></td>
+      <td>&nbsp;|&nbsp;</td>
+      <td>Add Track to Room:</td>
+      <td><select ng-model="trackToAdd" ng-options="d.id as d.track_name for d in trackList | orderBy : 'track_name'"></select>
+      <td><button ng-click='addTrackToRoom();'>Add Track</button></td>
+      <td>&nbsp;|&nbsp;</td>
+      <td><button ng-click='toggleRoomStatus();'>Change Status</button></td>
+    </tr>
+  </table>
+
+  <div class='gridStyle' ng-grid='roomGridOptions' ui-grid-auto-resize ng-style="getTableHeight()"> </div>
+</div> <!-- roomListTmpl -->
+
+<div class='newRoomTmpl' ng-show='showNewRoom()' ng-include="'/admin/panels/new_rooms.html'"></div>
+
+<div class='editRoomTmpl' ng-show='showEditRoom()' ng-include="'/admin/panels/edit_rooms.html'"> </div>
+

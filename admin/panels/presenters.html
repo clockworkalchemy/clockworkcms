@@ -1,0 +1,14 @@
+
+<div ng-controller='PresentersCtrl'>
+  <button ng-click='loadNewPresenterPage()' ng-show='showMainGrid()'>Create New Presenter</button>
+  <BR><BR>
+
+  <div ng-show='showNewPresenter()' ng-include="'/admin/panels/new_presenters.html'"></div>
+  <div ng-show='showEditPresenter()' ng-include="'/admin/panels/edit_presenters.html'"></div>
+
+  <div ng-show='showMainGrid()' class='gridStyle' ng-grid='presenterGridOptions' ui-grid-auto-resize ng-style="getTableHeight()"></div>
+
+
+</div><!-- #page -->
+
+

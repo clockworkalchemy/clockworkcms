@@ -1,0 +1,98 @@
+  <!--- start editpanel -->
+  <div>
+    <div ng-click='closeEditPanel();'>[ X ]</div>
+    <table>
+      <tr><td>Submitted Panelist Name: </td>
+          <td><input type=text ng-model="panelToEdit.name"/></td>
+          <td><button ng-click="approvePanelEdit()">{{panelToEdit.approved_word}}</button></td></tr>
+      <tr><td>Submitted Fan Name: </td>
+          <td><input type=text ng-model="panelToEdit.fanname" /> </td>
+          <td><!--button ng-click="markContacted()">{{panelToEdit.contacted_word}}</button--></td></tr>
+      <tr><td>Panelists: </td>
+          <td><div ng-repeat="p in panelistList" ng-if="panelistList.length > 0"/>{{p.name}}<span ng-if="p.fanname != ''"> aka {{p.fanname}} </span><span ng-click="removePresenterFromPanel(p.presenter_id)">[X]</span></div><div ng-if="panelistList.length <= 0" style="color: red; font-weight: bold;">YOU MUST ADD PRESENTERS TO THE PANEL</div></td>
+          <td>
+          <select ng-model='selectedPresenter' ng-options='pres.presenter_id as pres.name for pres in presenterData' ng-change='addPresenterToPanel()'><option value="">Add a Presenter to Panel</option></select></td></tr>
+          </td></tr>
+      <tr><td>Display Name: </td>
+          <td><input type=text ng-model="panelToEdit.displayname" />  </td>
+          <td><button ng-click="createPresenterFromPanel();">Create Presenter From Panel</button></td>
+      <tr><td>Panel Title: </td>
+          <td><input type="text" ng-model="panelToEdit.panel_title" /> </td></tr>
+      <tr><td>Phone Number: </td>
+          <td><input type=text ng-model='panelToEdit.phone' />  </td>
+          <td><button ng-click="deletePanel()">DELETE PANEL</button></td></tr>
+      <tr><td>At-Con Phone Number: </td>
+          <td><input type=text ng-model='panelToEdit.conphone' />  </td></tr>
+      <tr><td>Email Address</td>
+          <td><input type=text ng-model='panelToEdit.email' />  </td></tr>
+      <tr><td>Address</td>
+          <td><input type=text ng-model='panelToEdit.address' />  </td></tr>
+      <tr><td>City</td>
+          <td><input type=text ng-model='panelToEdit.city' />  </td></tr>
+      <tr><td>State</td>
+          <td><input type=text ng-model='panelToEdit.state' />  </td></tr>
+      <tr><td>Zip Code</td>
+          <td><input type=text ng-model='panelToEdit.zipcode' />  </td></tr>
+      <tr><td>Photo URL: </td>
+          <td><input type=text ng-model='panelToEdit.photo' /> </td></tr>
+      <tr><td>Bio: </td>
+          <td><textarea ng-model='panelToEdit.bio' cols="50"  rows="5"></textarea> </td></tr>
+      <tr><td>Event Type: </td>
+          <td><select ng-model='panelToEdit.event_type' ng-options='eType for eType in eventType'></select></td></tr>
+      <tr><td>Panel Track: </td>
+          <td><select ng-model='panelToEdit.panel_track' ng-options='track.id as track.track_name for track in trackList'></select></td></tr>
+      <tr><td>Discount Request: </td>
+          <td><select ng-model='panelToEdit.mem_dis' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+      <tr><td>Helper 1: </td>
+          <td><input type="text" ng-model="panelToEdit.helper1" />  </td></tr>
+      <tr><td>Helper 1 Fan Name: </td>
+          <td><input type=text ng-model="panelToEdit.helper1_fan" />  </td></tr>
+      <tr><td>Helper 2: </td>
+          <td><input type="text" ng-model="panelToEdit.helper2" />  </td></tr>
+      <tr><td>Helper 2 Fan Name: </td>
+          <td><input type=text ng-model="panelToEdit.helper2_fan" />  </td></tr>
+      <tr><td>Assistant 1: </td>
+          <td><input type="text" ng-model="panelToEdit.assistant1" /> </td></tr>
+      <tr><td>Assistant 1 Fan Name: </td>
+          <td><input type=text ng-model="panelToEdit.assistant1_fan" />  </td></tr>
+      <tr><td>Assistant 2: </td>
+          <td><input type="text" ng-model="panelToEdit.assistant2" /> </td></tr>
+      <tr><td>Assistant 2 Fan Name: </td>
+          <td><input type=text ng-model="panelToEdit.assistant2_fan" />  </td></tr>
+      <tr><td>Assistant 3: </td>
+          <td><input type="text" ng-model="panelToEdit.assistant3" />  </td></tr>
+      <tr><td>Assistant 3 Fan Name: </td>
+          <td><input type=text ng-model="panelToEdit.assistant3_fan" />  </td></tr>
+      <tr><td>Panel Description<br>( Submitted ): </td>
+          <td><textarea ng-model='panelToEdit.panel_description_sub' cols="50"  rows="5"></textarea> </td></tr>
+      <tr><td>Panel Description<br>( Edits go here ): </td>
+          <td><textarea ng-model='panelToEdit.panel_description' cols="50"  rows="5"></textarea> </td></tr>
+      <tr><td>Age Range: </td>
+          <td><select ng-model='panelToEdit.age_range' ng-options='obj.id as obj.name for obj in ageRangeList'></select></td></tr>
+      <tr><td>Panel Before?: </td>
+          <td><select ng-model='panelToEdit.panel_before' ng-options='obj.id as obj.name for obj in boolListWords'></select></td></tr>
+           
+      <tr><td>Other Notes: </td>
+          <td><textarea ng-model='panelToEdit.other_notes' cols="50"  rows="5"></textarea> </td></tr>
+      <tr><td>Workshop Kit Price: </td>
+          <td><input type="text" ng-model="panelToEdit.workshop_kit" /> </td></tr>
+      <tr><td>Projector Needed </td>
+          <td><select ng-model='panelToEdit.projector' ng-options='obj.id as obj.name for obj in boolListInts'></select></td></tr>
+      <tr><td>Other Equipment Needs: </td>
+          <td><textarea ng-model='panelToEdit.other_equipment' cols="50"  rows="5"></textarea> </td></tr>
+      <tr><td>Panel Length </td>
+          <td><select ng-model="panelToEdit.panel_length"  ng-options='obj.id as obj.name for obj in panelLengthOpts'/></select> </td></tr>
+<!--
+      <tr><td>Time Slot 1st: </td>
+          <td><select ng-model='panelToEdit.first_choice' ng-options='obj.id as obj.name for obj in timeSlots'></select></td></tr>
+      <tr><td>Time Slot 2nd: </td>
+          <td><select ng-model='panelToEdit.second_choice' ng-options='obj.id as obj.name for obj in timeSlots'></select></td></tr>
+      <tr><td>Time Slot 3rd: </td>
+          <td><select ng-model='panelToEdit.third_choice' ng-options='obj.id as obj.name for obj in timeSlots'></select></td></tr>
+-->
+      <tr><td>Unavailable Times: </td>
+          <td><textarea ng-model='panelToEdit.unavailable_times' cols="50"  rows="5"></textarea>
+          <td><button ng-click="savePanelEdits()">Save Changes</button></td></tr>
+    </table>
+  </div> <!-- end edit panel -->
+

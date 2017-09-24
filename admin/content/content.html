@@ -1,0 +1,16 @@
+
+<div ng-controller='ContentCtrl'>
+
+  <div ng-hide='showEditPage()'>
+    <a href='/admin/?p=new'>Create New Page</a><BR><BR>
+  </div>
+
+  <div id='content-grid' class='gridStyle' ng-grid='gridOptions' ng-hide='showEditPage()' ui-grid-auto-resize ng-style="getTableHeight()">
+  </div>
+
+  <div id='edit-content-form' class='editContentStyle' ng-show='showEditPage()' ng-include="'/admin/content/edit_content.html'">
+  </div>
+
+</div>
+
+

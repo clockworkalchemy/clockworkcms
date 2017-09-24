@@ -1,0 +1,162 @@
+<div>
+  <table>
+  <tr>
+    <td class='panel-search-head'>Day:</td>
+    <td class='panel-search-bod'>
+      <select ng-model='$parent.showDate'>
+        <option ng-repeat='d in panelDayList | orderBy:d.panel_day_order' value='{{d.date_id}}'>{{d.panel_day}}</option>
+      </select>
+    </td>
+    <td class='panel-search-head'>Room:</td>
+    <td class='panel-search-bod'>
+      <select ng-model='$parent.showRoom'>
+        <option value=''>-- Show all rooms--</option>
+        <option ng-repeat='room in roomList | orderBy:room.room_name' value='{{room.room_id}}'>{{room.room_name}}</option>
+      </select>
+    </td>
+  
+    <td>
+      <div>
+      &nbsp;
+      Filter Panel List by Title:
+      <input ng-model="$parent.titleSearch" legnth="15">
+      
+      <div id="panelListFloat" class="draggable resizable ui-widget-content" ng-show="$parent.showList()">
+        <div class="table">
+          <div class="table-row-group">
+            <div class="table-row panelListHeader">
+              <div class="panelTitle panelListHeader table-cell">Title</div>
+              <div class="panelLength panelListHeader table-cell">Duration</div>
+              <div class="panelType panelListHeader table-cell">Type</div>
+              <div class="panelType panelListHeader table-cell"></div>
+            </div>
+      
+            <div ng-repeat="panel in $parent.myData | filter:{panel_title:$parent.titleSearch}" ng-class="{selected: $parent.panel.panel_selected}" class="table-row" ng-click="$parent.selectPanelRow(panel)" ng-dblclick="$parent.showPanelSchedData(panel)">
+              <div class="panelTitle table-cell">{{panel.panel_title}}<br>Sched start: {{panel.sched_start}}</div>
+              <div class="panelLength table-cell">{{panel.panel_length}}</div>
+              <div class="panelType table-cell">{{panel.event_type}}</div>
+              <div class="panelType table-cell"><button ng-click="$parent.showPanelSchedData(panel)">Add</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="panelScheduleFloat" class="draggable resizable ui-widget-content" ng-show="$parent.showSelectedPanel()">
+       <div ng-click="$parent.clearSelectedPanel()">[X]</div>
+      
+          <div class="table">
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Day
+            </div>
+            <div class="table-cell">
+              <select ng-model='$parent.showDate' class='smallSelect'>
+                <option value='1'>Thursday</option>
+                <option value='2'>Friday</option>
+                <option value='3'>Saturday</option>
+                <option value='4'>Sunday</option>
+                <option value='5'>Monday</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Room
+            </div>
+            <div class="table-cell">
+              <select ng-model='$parent.useRoom' class='smallSelect'>
+                <option value=''>-- Show all rooms--</option>
+                <option ng-repeat='room in roomList | orderBy:room.room_name' value='{{room.room_id}}'>{{room.room_name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Start Time
+            </div>
+            <div class="table-cell">
+              <select ng-model="$parent.panelStartTime" class="smallSelect" ng-change="$parent.setEndTime(panelStartTime)">
+                <option value=''>-- Pick a time --</option>
+                <option ng-repeat="startTime in timeSlots | filter:{dateId:$parent.showDate}" value="{{startTime.startTime}}">{{formatDate(startTime.startTime) | date:'hh:mm a'}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              End Time
+            </div>
+            <div class="table-cell">
+              {{$parent.panelEndTime | date:'hh:mm a'}}
+            </div>
+          </div>
+        </div>
+        <button ng-click='$parent.addPanelToSchedule()'>Add Panel to Schedule</button>
+        <hr>
+        <div class="table">
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Title
+            </div>
+            <div class="table-cell">
+              {{$parent.selectedPanel.panel_title}}
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Event Type
+            </div>
+            <div class="table-cell">
+              {{$parent.selectedPanel.event_type}}
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Duration
+            </div>
+            <div class="table-cell">
+              {{$parent.selectedPanel.panel_length}} hours
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+            Submitted Description
+            </div>
+            <div class="table-cell">
+              {{$parent.selectedPanel.panel_description_sub}}
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Edited Description
+            </div>
+            <div class="table-cell">
+              {{$parent.selectedPanel.panel_description}}
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Age Range
+            </div>
+            <div class="table-cell">
+              {{$parent.selectedPanel.age_range}}
+            </div>
+          </div>
+          <div class="table-row-group">
+            <div class="table-header-cell">
+              Presenters
+            </div>
+            <div class="table-cell" ng-class="{ 'badform': !selectedPanel.presenters.length }">
+              <div ng-repeat='pres in $parent.selectedPanel.presenters'>{{pres.name}}</div>
+              <div ng-show="!$parent.selectedPanel.presenters.length">Please add a presenter</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
+      <button ng-click='$parent.showPanelList()'>Show Panel List </button>
+      </div>
+    </td>
+  </tr>
+  </table>
+</div>

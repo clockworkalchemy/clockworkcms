@@ -1,0 +1,405 @@
+
+
+.table-row { display: table-row; }
+.table { display: table; }
+.table-cell { display: table-cell; }
+.table-header-cell { display: table-cell; font-weight: bold; }
+.table-row-group { display: table-row-group; }
+
+
+#content {
+   overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+#content div {
+}
+
+.center {
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.badform {
+	border: 1px solid #FF0000 !important;
+}
+
+
+/*** Box area ***/
+.box-image {
+   width: 100px;
+   height: 100px;
+   display: inline;
+   margin: 0 10px 10px 10px;
+   float: left;
+   border-radius: 5px;
+}
+
+#box-area {
+}
+
+#page-main {
+   min-height: 200px;
+   border-radius: 10px;
+   padding: 30px;
+   font-size: 10px;
+
+   color: #332D1F;
+   margin-bottom: 20px;
+}
+
+
+.panels-cell {
+   padding: 4px;
+   background: #F9EDC5;
+}
+
+.panels-cell-alt {
+   padding: 4px;
+   background: #B6985A;
+}
+
+
+#page-content {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+
+button {
+   border: solid 1px rgba(0,0,0,1);
+   -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+           border-radius: 2px;
+   padding: 3px;
+   display: inline-block;
+   color: 000000;
+}
+
+.relative { position: relative; }
+
+.trackStyle_1 { background: #A04040; } /* maroon */
+.trackStyle_2 { background: #FF0000; } /* red */
+.trackStyle_3 { background: #808000; } /* olive */
+.trackStyle_4 { background: #FFFF00; } /* yellow */
+.trackStyle_5 { background: #008000; } /* green */
+.trackStyle_6 { background: #00FF00; } /* lime */
+.trackStyle_7 { background: #008080; } /* teal */
+.trackStyle_8 { background: #00FFFF; } /* aqua */
+.trackStyle_9 { background: #4040A0; } /* navy */
+.trackStyle_10 { background: #0000FF; } /* blue */
+.trackStyle_11 { background: #800080; } /* purple */
+.trackStyle_12 { background: #FF00FF; } /* fuscia */
+.trackStyle_13 { background: #FF80FF; } /* fuscia-grey */
+.trackStyle_14 { background: #808080; } /* grey */
+.trackStyle_15 { background: #FF8888; } /* PINK? */
+
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 800px;
+    height: 500px;
+}
+
+.gridSchedStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 800px;
+    height: 800px;
+    overflow: auto;
+}
+
+.gridPanelsStyle {
+    border: 1px solid rgb(212,212,212);
+    width: 290px;
+    height: 800px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.gridPanelsCellStyle {
+  font-size: 10px;
+  background-color: #F3F3F3;
+  border: 1px solid rgb(212,212,212);
+  height: 20px;
+  margin: 0;
+  padding: 0;
+
+}
+
+.highlight {
+  background: #FF4444;
+}
+
+.highlight-blue {
+  background: #4444FF;
+}
+
+.scheduleTable {
+  vertical-align: top;
+}
+
+.panelScheduleGridRowContainer {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.panelScheduleGridTable {
+  border-collapse: collapse;
+  display: table;
+  border: 1px solid rgb(100,100,100);
+  background-color: #FFFFFF;
+}
+
+.panelScheduleGridRow {
+  display: table-row;
+  height: 20px;
+}
+
+.panelScheduleGridBody {
+  display: table-row-group;
+}
+
+.panelScheduleGridHeaderRow {
+  display: table-header-group;
+  background-color: #EAEAEA;
+  height: 20px;
+  padding: 5px;
+}
+
+.panelScheduleGridHeaderTd {
+  padding: 5px;
+}
+
+.panelScheduleGridTd {
+  display: table-cell;
+  height: 10px;
+  width: 56px;
+  min-width: 56px;
+  max-width: 56px;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgb(100,100,100);
+  vertical-align: top;
+}
+
+.rowSpan_0 { display: none; }
+.rowSpan1 { height: 9px; }
+.rowSpan2 { height: 20px; }
+.rowSpan4 { height: 40px; }
+.rowSpan8 { height: 84px; }
+.rowSpan12 { height: 132px; }
+.rowSpan16 { height: 176px; }
+.rowSpan20 { height: 221px; }
+.rowSpan24 { height: 266px; }
+.rowSpan28 { height: 311px; }
+.rowSpan32 { height: 356px; }
+.rowSpan36 { height: 402px; }
+.rowSpan40 { height: 447px; }
+.rowSpan44 { height: 492px; }
+.rowSpan48 { height: 536px; }
+
+.panelGridTimeHover {
+  border: 2px solid rgb(0,0,0);
+}
+
+.panelGridTimeHoverOK {
+  background-color: #00FF00;
+}
+
+.panelGridTimeHoverBAD {
+  background-color: #FF0000;
+}
+
+.panelGridTime {
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.panelGridTime:hover {
+  border: 1px solid rgb(0,0,0);
+}
+
+.panelGridTimePanel {
+  width: 54px;
+  font-size: 10px;
+  margin: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.panelGridTimePanel:hover {
+  padding: 5px;
+  font-weight: bold;
+  box-shadow: 0px 0px 3px 3px black inset;
+}
+
+.editPanelStyle {
+  border: 1px solid rgb(100,100,100);
+}
+
+.track-span-style {
+  border: 1px solid rgb(100,100,100);
+  padding: 1px;
+  margin: 1px;
+  font-size: 12px;
+}
+
+
+.subpage {
+        margin-top: 20px;
+}
+.subpage .main-content h1{
+        font-weight: bold;
+        text-align:center;
+}
+
+
+.sched-grid-row {
+  height: 5px;
+  line-height: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 8px;
+}
+
+.sched-grid-table {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+
+.sched-grid-panel {
+  width: 60px;
+  padding: 2px;
+  overflow: wrap;
+  font-size: 8px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.sched-grid-time {
+  width: 40px;
+  padding: 2px;
+  font-size: 9px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.sched-grid-div {
+  overflow: scroll;
+}
+
+.sched-grid-head {
+  font-size: 10px;
+  border: 1px solid black;
+}
+
+.evenRow {
+  background-color: #F1F1F1;
+}
+
+.topRow {
+  border-top: 2px solid black;
+}
+
+.schedPanelOptions {
+  width: 300px;
+  height: 200px;
+  font-size: 8px;
+  margin: 0;
+  position: absolute;
+  overflow: auto;
+  background-color: #FFFFFF;
+  border: 2px solid black;
+  z-index: 10;
+}
+
+#panelListFloat {
+  z-index: 15;
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  background-color: #FFFFFF;
+  border: 2px solid black;
+  overflow: auto;
+
+  font-size: 8px;
+}
+
+.panelListHeader {
+  font-weight: bold;
+  background-color: #F0F0F0;
+}
+
+.panelTitle {
+  width: 200px;
+  size: 10px;
+  border: 1px solid gray;
+}
+
+.panelStatus {
+  width: 50px;
+  size: 10px;
+  border: 1px solid gray;
+}
+
+.panelLength {
+  width: 50px;
+  size: 10px;
+  border: 1px solid gray;
+}
+
+.panelTrack {
+  width: 50px;
+  size: 10px;
+  border: 1px solid gray;
+}
+
+.panelType {
+  width: 50px;
+  size: 10px;
+  border: 1px solid gray;
+}
+
+.smallSelect {
+  font-size: 10px;
+}
+
+#panelScheduleFloat {
+  z-index: 15;
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  background-color: #FFFFFF;
+  border: 2px solid black;
+  overflow: auto;
+  padding: 5px;
+}
+
+.selected {
+  background-color: #E0FFFF;
+}
+
+.selectedRoom {
+  background-color: #D0FFFF;
+}
+
+.selectedRoomTime {
+  background-color: #FFD0D0;
+}
+
+.selectedTime {
+  background-color: #FFFFD0;
+}
+
+

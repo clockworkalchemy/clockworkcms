@@ -1,0 +1,47 @@
+  <div class='editRoomTmpl'>
+    <form id='adminForm'>
+      <table width='100%'>
+        <tr>
+          <td><input type='submit' ng-click='cancelEditRoom();' value='Cancel'></td>
+          <td width='100%'></td>
+          <td><input type='submit' ng-click='saveEdits();' value='Save Edits'></td>
+        </tr>
+      </table>
+
+      <div>
+        <label for="room_name"><span class="form_label">Room Name</span></label>
+        <input type="text"  id='room_name' ng-model='editRoom.room_name'>
+        <label for="description"><span class="form_label">Description<span></label>
+        <input type="text"  id='description' ng-model='editRoom.description'>
+        <label for="capacity"><span class="form_label">Capacity</span></label>
+        <input type="text"  id='capacity' ng-model='editRoom.capacity'>
+        <label for="mapclass"><span class="form_label">Map Class</span></label>
+        <input type="text"  id='mapclass' ng-model='editRoom.mapclass'>
+        <label for="floornum"><span class="form_label">Floor Num</span></label>
+        <input type="text"  id='floornum' ng-model='editRoom.floornum'>
+        <label for="latitude"><span class="form_label">Latitude</span></label>
+        <input type="text"  id='latitude' ng-model='editRoom.latitude' step="0.0001">
+        <label for="longitude"><span class="form_label">Longitude</span></label>
+        <input type="text"  id='longitude' ng-model='editRoom.longitude' step="0.0001">
+        <label for="roomstatus"><span class="form_label">Status</span></label>
+        <select id='roomstatus' ng-model='editRoom.roomstatus'>
+        <option value='1'>Active</option>
+        <option value='0'>Inactive</option>
+        </select>
+        <label for="nickname"><span class="form_label">Nickname</span></label>
+        <input type="text"  id='nickname' ng-model='editRoom.nickname'>
+      </div>
+
+      <div ng-grid='roomTrackGrid' ui-grid-auto-resize ng-style='getTrackTableHeight()'> </div>
+
+      <div>
+      <table width='100%'>
+        <tr>
+          <td><input type='submit' ng-click='cancelEditRoom();' value='Cancel'></td>
+          <td width='100%'></td>
+          <td><input type='submit' ng-click='saveEdits();' value='Save Edits'></td>
+        </tr>
+      </table>
+      </div>
+    </form>
+  </div> <!-- roomListTmpl -->

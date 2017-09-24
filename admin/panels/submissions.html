@@ -1,0 +1,13 @@
+<div ng-controller='SubmissionsCtrl'><!-- start page -->
+
+  <button ng-click='loadNewPanelPage()' ng-hide='showEditPage()'>Create New Panel</button><BR><BR>
+
+  <div class='gridStyle' ng-grid='panelGridOptions' ng-show='showListPage()' ui-grid-auto-resize ng-style="getTableHeight()">
+  </div>
+
+  <div class='gridStyle' ng-grid='newPanelGridOptions' ng-show='showNewPanelPage()' ui-grid-auto-resize ng-style="getNewTableHeight()">
+  </div>
+
+  <div id='edit-panel' ng-show='showEditPage()' ng-include="'/admin/panels/edit_submission.html'"></div>
+
+</div><!-- end page -->
