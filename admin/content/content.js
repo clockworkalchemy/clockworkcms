@@ -5,16 +5,20 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
   $routeProvider.when('/content', {
     templateUrl: 'content/content.html',
     controller: 'ContentCtrl'
+  }).when('/content/newpage', {
+    templateUrl: 'content/newpage.html',
+    controller: 'ContentCtrl'
   });
 }])
 
-.controller('ContentCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
+.controller('ContentCtrl', ['$scope', '$http', '$sce', '$location', function($scope, $http, $sce, $location) {
   $scope.myData = [];
   $scope.pageToEdit = {};
   $scope.showEdit = 0;
   $scope.errMsg = '';
   $scope.successMsg = '';
   $scope.pageHistory = [];
+  $scope.newPage = {};
 
   $scope.FEATURED_STATUSES = { '0': 'Normal', '1': 'Featured News', '2': 'Featured Important' };
   $scope.FEATURED_OPTS = [
@@ -76,16 +80,16 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
     };
   };
 
-  var pageCell = '<div class="ngCellText" ng-class="cellClass(row)">{{row.getProperty(col.field)}}</div>';
-  var editButton = '<button ng-click="editPage(row)">Edit</button>';
-  var pageNameCell = '<div class="ngCellText" ng-class="cellClass(row)" ng-dblclick="editPage(row)">' +
+  let pageCell = '<div class="ngCellText" ng-class="cellClass(row)">{{row.getProperty(col.field)}}</div>';
+  let editButton = '<button ng-click="editPage(row)">Edit</button>';
+  let pageNameCell = '<div class="ngCellText" ng-class="cellClass(row)" ng-dblclick="editPage(row)">' +
                      '{{row.getProperty(col.field)}}' +
                      '</div>';
-  var dateCell = '<div class="ngCellText" ng-class="cellClass(row)">' +
+  let dateCell = '<div class="ngCellText" ng-class="cellClass(row)">' +
                  '{{newDateObj(row.getProperty(col.field)) | date:"MM/dd/yyyy"}}' +
                  '</div>';
 
-  var searchHeader = '<div ng-click="col.sort($event)" ng-class="\'colt\' + col.index" class="ngHeaderText">{{col.displayName}} - <input ng-model="filterOptions.filterText" width=10/></div>';
+  let searchHeader = '<div ng-click="col.sort($event)" ng-class="\'colt\' + col.index" class="ngHeaderText">{{col.displayName}} - <input ng-model="filterOptions.filterText" width=10/></div>';
   $scope.filterOptions = { filterText: '' }; // filter page name
 
   $scope.gridOptions = { 
@@ -108,13 +112,11 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
   };
 
   $scope.editPage = function(row) {
-    var resId = row.entity.resource_id;
-
-    $scope.loadEditPage(resId);
+    $scope.loadEditPage(row.entity.resource_id);
   };
 
   $scope.loadEditPage = function(resId) {
-    var contentUrl = '/?ret=json&f=getcontent&ns=1&resource_id='+resId;
+    let contentUrl = '/?ret=json&f=getcontent&ns=1&resource_id='+resId;
 
     $http.get(contentUrl).
          then(function(data){
@@ -133,7 +135,7 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
   };
 
   $scope.saveEdits = function() {
-    var postData = 'ret=json&';
+    let postData = 'ret=json&';
 
     $scope.pageToEdit['summary']
           .replace(/[\u2018\u2019]/g, "'")
@@ -163,9 +165,9 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
   };
 
   $scope.updateFeatured = function(id) {
-    var featured = $scope.pageToEdit.featured;
-    var featuredYear = $scope.pageToEdit.featuredyear;
-    var resId = $scope.pageToEdit.resource_id;
+    let featured = $scope.pageToEdit.featured;
+    let featuredYear = $scope.pageToEdit.featuredyear;
+    let resId = $scope.pageToEdit.resource_id;
 
     if( featured && featuredYear == '' ) {
       $scope.errMsg = 'You must select a year before making a page featured';
@@ -173,7 +175,7 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
       return;
     }
 
-    var url = '/admin/index.cgi?ret=json&f=update_featured_status&resource_id='+resId+'&featured='+featured+'&featuredyear='+featuredYear;
+    let url = '/admin/index.cgi?ret=json&f=update_featured_status&resource_id='+resId+'&featured='+featured+'&featuredyear='+featuredYear;
     $http.get(url).
          then(function(data){
       $scope.toggle(id);
@@ -181,10 +183,10 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
   };
 
   $scope.approveContent = function() {
-    var resId = $scope.pageToEdit.resource_id;
-    var rev = $scope.pageToEdit.revision;
+    let resId = $scope.pageToEdit.resource_id;
+    let rev = $scope.pageToEdit.revision;
 
-    var url = '/admin/index.cgi?ret=json&f=appr&resource_id='+resId+'&rev='+rev
+    let url = '/admin/index.cgi?ret=json&f=appr&resource_id='+resId+'&rev='+rev
 
     $http.get(url).
          then(function(data){
@@ -299,6 +301,21 @@ angular.module('myApp.content', ['ngRoute','ngGrid','sticky'])
     $scope.toggle(id);
     
     var url = '/admin/index.cgi?ret=json&d=deleteContent&method=DELETE&resource_id='+resId+"&rev="+revId;
+  };
+
+  $scope.cancelNewPage = function() {
+    $location.path( '/content' );
+  };
+
+  $scope.saveNewPage = function() {
+    let postData = 'p=new&pagename='+$scope.newPage.pagename+'&parent_page='+$scope.newPage.parentpage;
+
+    $http.post('/admin/',
+               postData,
+               { headers: {'Content-Type': 'application/x-www-form-urlencoded'} } ).
+         then(function( data ) {
+           $location.path( '/content' );
+    });
   };
 
 

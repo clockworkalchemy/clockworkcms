@@ -81,6 +81,7 @@ angular.module('myApp.adminMenu', ['ngRoute'])
   ];
 
   $scope.contentMenuOptions = [
+    {'link': '/admin/#!/content', 'title': 'Content List'},
     {'link': '/admin/#!/content/newpage', 'title': 'Create New Page'},
   ];
 
