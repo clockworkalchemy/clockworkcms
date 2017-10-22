@@ -1,0 +1,40 @@
+<div>
+  <div id='content-err'></div>
+
+  <div>
+    <H3>New Page</H3>
+
+    <div id='success-box' class="alert alert-success" style='display: none;'>
+      <a href="javascript:exit()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {{successMsg}}
+    </div>
+
+    <div id='error-box' class="alert alert-danger" style='display: none;'>
+      <a href="javascript:exit()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      {{errMsg}}
+    </div>
+ 
+   <button type='button' ng-click='saveNewPage()' class='btn btn-default'>Save</button>
+   <button type='button' ng-click='cancelNewPage()' class='btn btn-default'>Cancel</button>
+
+   <form>
+    <table>
+    <tr>
+      <td>Select a parent page</td>
+      <td><select ng-model='newPage.parentpage'>
+          <option value=''>None</option>
+          <option ng-repeat='item in myData' value='{{item.resource_id}}'>{{item.pagename}}</option>
+          </select></td>
+      </tr>
+      <tr>
+        <td>Page Name</td>
+        <td><input type='text' ng-model='newPage.pagename' size=15></td>
+      </tr>
+      </table>
+      </form>
+    
+  </div> <!-- #page-main -->
+</div><!-- #page -->
+
+
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" ng-app="myApp">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width" />
+   <title>Clockwork Alchemy Content Management - Edit Page</title>
+
+   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+   <link rel='stylesheet' type='text/css' media='all' href='/js/bootstrap/css/bootstrap.min.css' />
+   <link rel='stylesheet' type='text/css' href='/js/ng-grid/ng-grid.css' />
+   <link rel='stylesheet' type='text/css' href='/admin/style/admin.css' />
+   <link rel="stylesheet" type="text/css" href="/admin/js/datetimepicker/jquery.datetimepicker.css"/ >
+
+   <script src='/js/moment.min.js'></script>
+
+   <script>
+    moment().format();
+   </script>
+
+</head>
+
+<body>
+ 
+<div class="container">
+  <div class="page-header" ng-controller='adminMenuCtrl'>
+    <h1 ng-bind="getTitle()"></h1>
+
+    <div class='btn-group'>
+      <div class='btn-group'>
+        <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">Go To
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+          <li role="presentation" ng-repeat='item in menuOptions'><a role="menuitem" ng-href="{{item.link}}">{{item.title}}</a> </li>
+        </ul>
+      </div>
+      <div class='btn-group' ng-show="isPage('/panels')">
+        <button class="btn btn-primary dropdown-toggle" id="menu2" type="button" data-toggle="dropdown">Programming
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+          <li role="presentation" ng-repeat='item in panelsMenuOptions'><a role="menuitem" ng-href="{{item.link}}">{{item.title}}</a> </li>
+        </ul>
+      </div>
+      <div class='btn-group' ng-show="isPage('/content')">
+        <button class="btn btn-primary dropdown-toggle" id="menu3" type="button" data-toggle="dropdown">Content
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
+          <li role="presentation" ng-repeat='item in contentMenuOptions'><a role="menuitem" ng-href="{{item.link}}">{{item.title}}</a> </li>
+        </ul>
+      </div>
+      <button ng-show="isPage('/admin')" class="btn btn-primary" data-toggle="modal" data-target="#passwordModal" type="button">Change Password</button>
+    </div>
+
+    <div id="passwordModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="alert alert-success" ng-show='passwordDone'>
+            <strong>Success!</strong> Your password has been changed.
+          </div>
+          <div class="modal-body">
+          New Password: <input ng-model='password'>
+          </div>
+          <div class='modal-footer'>
+            <button type='button' class='btn btn-defaul' ng-click="changeAdminPassword();">Change Password</button>
+            <button type='button' class='btn btn-defaul' data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div ng-view>
+      View Content
+    </div>
+
+  </div>
+
+</div> <!-- end container -->
+
+  </div> <!-- admin page -->
+</div><!-- #page-content -->
+
+<script type='text/javascript' src='/js/jquery-1.8.3.min.js'></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/ng-grid/ng-grid-2.0.11.min.js"></script>
+<script type="text/javascript" src="/js/sticky.js"></script>
+<script src="/admin/js/datetimepicker/build/jquery.datetimepicker.full.js"></script>
+
+<script src="js/app.js"></script>
+<script src="admin/admin.js"></script>
+<script src="gallery/gallery.js"></script>
+<script src="users/users.js"></script>
+<script src="bazaar/bazaar.js"></script>
+<script src="content/content.js"></script>
+<script src="admin/adminMenu.js"></script>
+<script src="panels/panels.js"></script>
+<script src="panels/submissions.js"></script>
+<script src="panels/presenters.js"></script>
+<script src="panels/rooms.js"></script>
+<script src="panels/reports.js"></script>
+<script src="panels/scheduler.js"></script>
+
+
+</body>
+</html>

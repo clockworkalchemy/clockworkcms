@@ -1,22 +1,12 @@
 
 <div ng-controller='UsersCtrl'>
 
-  <div class='gridStyle hidden' ng-grid='newUserGridOptions' id='new-grid'> </div>
+  <div ng-show='showList()'><button ng-click='loadNewPage();'>Create New User</button></div>
 
-  <table><tr>
-    <td><button ng-click='loadNewPage();'>Create New User</button></td>
-    <td colspan=5></td>
-  </tr><tr>
-    <td>Add Track to User:</td>
-    <td><select ng-model="trackToAdd" ng-options="d.id as d.track_name for d in trackList | orderBy : 'track_name'"></select>
-    <td><button ng-click='addTrackToUser();'>Add Track</button></td>
-    <td>&nbsp;|&nbsp;</td>
-    <td>Add Access Group to User:</td>
-    <td><select ng-model="groupToAdd" ng-options="d.id as d.access_group for d in groupList | orderBy : 'group'"></select>
-    <td><button ng-click='addGroupToUser();'>Add Group</button></td>
-  </tr></table>
+  <div class='gridStyle' ng-grid='gridOptions' ui-grid-auto-resize ng-style="getTableHeight()" ng-show='showList()'> </div>
 
-  <div class='gridStyle' ng-grid='gridOptions' ui-grid-auto-resize ng-style="getTableHeight()"> </div>
+  <div ng-show='showNewPage()' ng-include="'/admin/users/new_user.html'"></div>
+  <div ng-show='showEditPage()' ng-include="'/admin/users/edit_user.html'"></div>
 
 
 </div><!-- #page -->

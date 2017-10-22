@@ -80,6 +80,10 @@ angular.module('myApp.adminMenu', ['ngRoute'])
     {'link': '/admin/#!/panels/reports', 'title': 'Schedule Reports'}
   ];
 
+  $scope.contentMenuOptions = [
+    {'link': '/admin/#!/content/newpage', 'title': 'Create New Page'},
+  ];
+
   $scope.getMenuOptions = function() {
     $http.get('/admin/?ret=json&f=get_groups_for_user').
        then(function(data,status,headers,config) {
