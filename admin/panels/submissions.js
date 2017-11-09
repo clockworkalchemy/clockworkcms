@@ -12,8 +12,9 @@ angular.module('myApp.panels.submissions', ['ngRoute'])
 .controller('SubmissionsCtrl', ['$scope', '$http', '$sce', function($scope, $http, $sce) {
   $scope.myData = [];
   $scope.presenterData = [];
+  $scope.presenterHash = {};
   $scope.panelistList = [];
-  $scope.selectedPresenter = {};
+  $scope.selectedPresenter = '';
   $scope.newPanel = [];
   $scope.showEdit = false;
   $scope.showNewPanel = false;
@@ -194,6 +195,7 @@ angular.module('myApp.panels.submissions', ['ngRoute'])
 
   // Remove Presenter from Panel
   $scope.doRemovePresenterFromPanel = function( presenterId ) {
+
     var delData = 'p=events-and-exhibits/panels/'+
       $scope.panelToEdit.panel_id+'/presenters'+
       '&presenter_id='+presenterId+
@@ -202,29 +204,14 @@ angular.module('myApp.panels.submissions', ['ngRoute'])
     $http.get('/admin/?'+delData,
                { headers: {'Content-Type': 'application/x-www-form-urlencoded'} } ).
          then(function(data) {
-           $scope.getPresenterInfoForPanel( $scope.panelToEdit, $scope.panelToEdit.panel_id );
+           for( let i = 0; i < $scope.panelToEdit.presenters.length; i++ ) {
+             let pres = $scope.panelToEdit.presenters[i];
+             if(pres.presenter_id == presenterId) {
+               $scope.panelToEdit.presenters.splice(i, 1);
+               return;
+             }
+           }
     });
-  };
-
-  // Start process to remove Presenter from Panel
-  $scope.removePresenterFromPanel = function( presenterId ) {
-
-    if( $scope.panelToEdit.presenters.length <= 1 ) {
-      var panelInfo = {};
-      var httpPromise = $http.get('/?ret=json&p=events-and-exhibits/panels/'+$scope.panelToEdit.panel_id,
-               { headers: {'Content-Type': 'application/x-www-form-urlencoded'} } ).
-          then(function(data) {
-            panelInfo = data.page[0];
-
-            if( panelInfo.schedule.length > 0 ) {
-              alert( "You cannot remove the last Presenter from a panel that is on the schedule! Remove it from the schedule first." );
-            } else {
-              $scope.doRemovePresenterFromPanel( presenterId );
-            }
-      });
-    } else {
-      $scope.doRemovePresenterFromPanel( presenterId );
-    }
   };
 
   $scope.addPresenterToPanel = function() {
@@ -236,8 +223,10 @@ angular.module('myApp.panels.submissions', ['ngRoute'])
   $scope.addPresenterToPanelById = function(presId) {
     var i;
 
-    for( i = 0; i < $scope.panelistList.length; i++ ) {
-      if( $scope.panelistList[i].presenter_id == presId ) {
+//    for( i = 0; i < $scope.panelistList.length; i++ ) {
+//      if( $scope.panelistList[i].presenter_id == presId ) {
+    for( i = 0; i < $scope.panelToEdit.presenters.length; i++ ) {
+      if( $scope.panelToEdit.presenters[i].presenter_id == presId ) {
         alert( "That presenter is already assigned to this panel" );
         $scope.selectedPresenter = "";
         return;
@@ -246,11 +235,15 @@ angular.module('myApp.panels.submissions', ['ngRoute'])
     var postData = 'p=events-and-exhibits/panels/'+$scope.panelToEdit.panel_id+'/presenters';
     postData += '&presenter_id='+presId+'&ret=json';
 
+    let pres = $scope.presenterHash[presId];
+    let newPres = {name: pres.name, presenter_id: pres.presenter_id};
+    
     $http.post('/admin/',
                postData,
                { headers: {'Content-Type': 'application/x-www-form-urlencoded'} } ).
          then(function(data) {
-           $scope.panelistList.push($scope.getPresenterByField( 'presenter_id', presId));
+
+           $scope.panelToEdit.presenters.push(newPres);
            $scope.selectedPresenter = "";
          }
     );
@@ -265,6 +258,7 @@ angular.module('myApp.panels.submissions', ['ngRoute'])
         let res = data.data.page;
         for( let key in res ) {
           $scope.presenterData.push( res[key] );
+          $scope.presenterHash[res[key].presenter_id] = res[key];
         }
     });
   };
@@ -502,7 +496,7 @@ angular.module('myApp.panels.submissions', ['ngRoute'])
 
   $scope.getTableHeight = function() {
     return {
-      height: Math.min( $scope.myData.length * 30, 600 ) + 'px'
+      height: Math.min( 100+($scope.myData.length * 30), 600 ) + 'px'
     };
   };
 

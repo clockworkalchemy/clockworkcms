@@ -9,9 +9,17 @@
           <td><input type=text ng-model="panelToEdit.fanname" /> </td>
           <td><!--button ng-click="markContacted()">{{panelToEdit.contacted_word}}</button--></td></tr>
       <tr><td>Panelists: </td>
-          <td><div ng-repeat="p in panelistList" ng-if="panelistList.length > 0"/>{{p.name}}<span ng-if="p.fanname != ''"> aka {{p.fanname}} </span><span ng-click="removePresenterFromPanel(p.presenter_id)">[X]</span></div><div ng-if="panelistList.length <= 0" style="color: red; font-weight: bold;">YOU MUST ADD PRESENTERS TO THE PANEL</div></td>
           <td>
-          <select ng-model='selectedPresenter' ng-options='pres.presenter_id as pres.name for pres in presenterData' ng-change='addPresenterToPanel()'><option value="">Add a Presenter to Panel</option></select></td></tr>
+          <div ng-repeat="p in $parent.panelToEdit.presenters" ng-if="$parent.panelToEdit.presenters.length > 0"/>
+            {{p.name}}
+            <span ng-click="doRemovePresenterFromPanel(p.presenter_id)">[X]</span>
+          </div>
+          <div ng-if="$parent.panelToEdit.presenters.length <= 0" style="color: red; font-weight: bold;">
+            YOU MUST ADD PRESENTERS TO THE PANEL
+          </div>
+          </td>
+          <td>
+          <select ng-model='$parent.selectedPresenter' ng-options='pres.presenter_id as pres.name for pres in presenterData' ng-change='$parent.addPresenterToPanel()'><option value="">Add a Presenter to Panel</option></select></td></tr>
           </td></tr>
       <tr><td>Display Name: </td>
           <td><input type=text ng-model="panelToEdit.displayname" />  </td>
