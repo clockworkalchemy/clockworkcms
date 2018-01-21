@@ -20,16 +20,48 @@
     </div>
   </div>
 
+  <div class="modal fade" id="addGroup" role="dialog">
+    <form>
+    <div class="modal-dailog modal-sm">
+      <div class="modal-content">
+       <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Group to User</h4>
+       </div>
+       <div class="modal-body">
+         <select ng-model="$parent.groupToAdd" ng-options="d.id as d.access_group for d in groupList | orderBy : 'group'"></select>
+       </div>
+        <div class="modal-footer">
+          <button ng-click='$parent.addGroupToUser()' class="btn btn-default">Add Group</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+<!--
+  <table><tr>
+    <td>Add Track to User:</td>
+    <td><button ng-click='addTrackToUser();'>Add Track</button></td>
+    <td>&nbsp;|&nbsp;</td>
+    <td>Add Access Group to User:</td>
+         <select ng-model="trackToAdd" ng-options="d.id as d.track_name for d in trackList | orderBy : 'track_name'"></select>
+    <td><button ng-click='addGroupToUser();'>Add Group</button></td>
+  </tr></table>
+-->
+
+
   <div>
     <button class="btn btn-info" ng-click='closeEditUser()'>Done</button>
     <button class="btn btn-info" ng-click='saveEdit()'>Save</button>
+    <button class="btn btn-info" data-toggle="modal" data-target="#passModal">Change Password</button>
+    <button class="btn btn-info" data-toggle="modal" data-target="#addGroup">Add Group</button>
   </div>
   <table>
   <tr>
     <td>User name:</td>
     <td><input type='text' ng-model='$parent.editUser.username'></td>
     <td>
-      <button class="btn btn-info" data-toggle="modal" data-target="#passModal">Change Password</button>
     </td>
   </tr>
   <tr>
@@ -42,18 +74,6 @@
     <td><input type='text' ng-model='$parent.editUser.name'></td>
     <td></td>
   </tr>
-
-<!--
-  <table><tr>
-    <td>Add Track to User:</td>
-    <td><select ng-model="trackToAdd" ng-options="d.id as d.track_name for d in trackList | orderBy : 'track_name'"></select>
-    <td><button ng-click='addTrackToUser();'>Add Track</button></td>
-    <td>&nbsp;|&nbsp;</td>
-    <td>Add Access Group to User:</td>
-    <td><select ng-model="groupToAdd" ng-options="d.id as d.access_group for d in groupList | orderBy : 'group'"></select>
-    <td><button ng-click='addGroupToUser();'>Add Group</button></td>
-  </tr></table>
--->
 
   <tr>
     <td valign=top>Tracks</td>

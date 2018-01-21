@@ -35,7 +35,7 @@ angular.module('myApp.users', ['ngRoute'])
          || $scope.editUser.trackList.length == 0 ) { return { height: '48px' }; }
 
     return {
-      height: Math.min( ( $scope.editUser.trackList.length * 24 ) + 24, 200 ) + 'px'
+      height: Math.min( ( $scope.editUser.trackList.length * 24 ) + 50, 200 ) + 'px'
     };
   };
 
@@ -44,7 +44,7 @@ angular.module('myApp.users', ['ngRoute'])
          || $scope.editUser.securityList.length == 0 ) { return { height: '48px' }; }
 
     return {
-      height: Math.min( ( $scope.editUser.securityList.length * 24 ) + 24, 200 ) + 'px'
+      height: Math.min( ( $scope.editUser.securityList.length * 24 ) + 50, 200 ) + 'px'
     };
   };
 
@@ -141,13 +141,23 @@ angular.module('myApp.users', ['ngRoute'])
   };
 
 
-  // TODO
   $scope.saveEdit = function() {
     console.log($scope.editUser);
     console.log($scope.origEditUser);
-    $scope.editUser = {};
-    $scope.origEditUser = {};
-    $scope.showEdit = false;
+
+    var postData = 'p=updateuser&ret=json';
+    postData += '&username='+$scope.editUser.username;
+    postData += '&name='+$scope.editUser.name;
+    postData += '&email='+$scope.editUser.email;
+    $http.post('/admin/',
+               postData,
+               { headers: {'Content-Type': 'application/x-www-form-urlencoded'} } ).
+         then(function(data) {
+      $scope.getUserList();
+      $scope.editUser = {};
+      $scope.origEditUser = {};
+      $scope.showEdit = false;
+    });
   };
 
 
