@@ -123,11 +123,13 @@ angular.module('myApp.users', ['ngRoute'])
     $scope.showNew = false;
   };
 
-  $scope.saveNew = function( row ) {
+  $scope.saveNew = function() {
     var postData = 'p=newuser&ret=json';
-    postData += '&username='+row.entity.username;
-    postData += '&password='+row.entity.password;
-    postData += '&email='+row.entity.email;
+
+    postData += '&username='+$scope.newUser.username;
+    postData += '&name='+$scope.newUser.name;
+    postData += '&password='+$scope.newUser.password;
+    postData += '&email='+$scope.newUser.email;
 
     $http.post('/admin/',
                postData,

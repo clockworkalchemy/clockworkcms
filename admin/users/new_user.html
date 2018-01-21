@@ -6,6 +6,10 @@
     <td><input type='text' ng-model='$parent.newUser.username'></td>
   </tr>
   <tr>
+    <td>Password:</td>
+    <td><input type='text' ng-model='$parent.newUser.password'></td>
+  </tr>
+  <tr>
     <td>Name:</td>
     <td><input type='text' ng-model='$parent.newUser.name'></td>
   </tr>
@@ -14,6 +18,7 @@
     <td><input type='text' ng-model='$parent.newUser.email'></td>
   </tr>
   </table>
+  <button ng-click='saveNew()' class="btn btn-default">Save New User</button>
 </div>
 
 
